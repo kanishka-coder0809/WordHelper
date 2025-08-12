@@ -1,22 +1,24 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import LoginPage from "./pages/LoginPage";
-import Dashboard from "./pages/Dashboard";
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+require("dotenv").config();
 
-function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        {/* Login Page as the default route */}
-        <Route path="/" element={<LoginPage />} />
-        
-        {/* Dashboard Page */}
-        <Route path="/dashboard" element={<Dashboard />} />
+const app = express();
+app.use(cors());
+app.use(express.json());
 
-        {/* Optional: Handle 404 page */}
-        {/* <Route path="*" element={<NotFound />} /> */}
-      </Routes>
-    </BrowserRouter>
-  );
-}
+app.get("/", (req, res) => {
+  res.send("WordHelper Backend is running");
+});
 
-export default App;
+app.get("/api/test", (req, res) => {
+  res.json({ message: "API test successful" });
+});
+
+const PORT = process.env.PORT || 5000;
+
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => {
+    app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+  })
+  .catch(err => console.error("❌ MongoDB connection error:", err));
