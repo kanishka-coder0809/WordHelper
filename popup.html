@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WordHelper</title>
+    <style>
+      body {
+        width: 250px;
+        padding: 10px;
+        font-family: Arial, sans-serif;
+      }
+      textarea {
+        width: 100%;
+        margin-bottom: 10px;
+        font-size: 14px;
+      }
+      button {
+        padding: 6px 12px;
+        background: purple;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      button:hover {
+        background: darkviolet;
+      }
+      ul {
+        margin-top: 10px;
+        padding-left: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>WordHelper</h3>
+    <textarea id="textInput" rows="4" placeholder="Type something..."></textarea>
+    <br />
+    <button id="checkBtn">Check</button>
+    <ul id="results"></ul>
+
+    <script>
+      document.getElementById("checkBtn").addEventListener("click", () => {
+        const text = document.getElementById("textInput").value;
+        const results = document.getElementById("results");
+        results.innerHTML = "";
+
+        // Fake grammar check rules
+        let suggestions = [];
+        if (text.includes("go ")) {
+          suggestions.push({ error: "go", suggestion: "goes" });
+        }
+        if (text.includes("everyday")) {
+          suggestions.push({ error: "everyday", suggestion: "every day" });
+        }
+
+        if (suggestions.length === 0) {
+          results.innerHTML = "<li>✅ No issues found!</li>";
+        } else {
+          suggestions.forEach((s) => {
+            const li = document.createElement("li");
+            li.textContent = `❌ ${s.error} → ✅ ${s.suggestion}`;
+            results.appendChild(li);
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
