@@ -3,13 +3,24 @@
   "name": "WordHelper",
   "description": "Grammar and Synonym helper like Grammarly",
   "version": "1.0",
-  "action": {
-    "default_popup": "popup.html",
-    "default_icon": {
-      "16": "icon.png",
-      "48": "icon.png",
-      "128": "icon.png"
-    }
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  "icons": {
+  "16": "icon.png",
+  "48": "icon.png",
+  "128": "icon.png"
+},
+"action": {
+  "default_popup": "popup.html",
+  "default_icon": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  }
+
   },
   "background": {
     "service_worker": "background.js"
@@ -19,13 +30,14 @@
     "activeTab",
     "scripting"
   ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
       "js": ["content.js"],
       "run_at": "document_end"
     }
-    
   ]
 }
-
